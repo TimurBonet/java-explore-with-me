@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 public class ErrorResponse {
     private final String status;
     private final String reason;
-    private final String message;
+    private final String description;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = Constants.DATE_TIME_FORMAT)
     private final LocalDateTime errorTime;
 }

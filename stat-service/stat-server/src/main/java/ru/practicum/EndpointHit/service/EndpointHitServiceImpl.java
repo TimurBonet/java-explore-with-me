@@ -24,15 +24,15 @@ public class EndpointHitServiceImpl implements EndpointHitService {
     @Transactional
     @Override
     public void save(EndpointHit endpointHit) {
-        log.info("Начало сохранения статистики");
+        log.info("The beginning of the process of creating a statistics record");
         endpointHitRepository.save(endpointHit);
-        log.info("Статистика сохранена");
+        log.info("The statistics record has been created");
     }
 
     @Transactional(readOnly = true)
     @Override
     public List<ViewStats> findByParams(String start, String end, List<String> uris, boolean unique) {
-        log.info("Получение статистики просмотров");
+        log.info("The beginning of the process of obtaining statistics of views");
         List<ViewStats> listViewStats;
 
         if (CollectionUtils.isEmpty(uris)) {
@@ -49,7 +49,7 @@ public class EndpointHitServiceImpl implements EndpointHitService {
                     uris);
         }
 
-        log.info("Статистика получена успешно");
+        log.info("Getting the statistics of the views is completed");
         return listViewStats;
     }
 

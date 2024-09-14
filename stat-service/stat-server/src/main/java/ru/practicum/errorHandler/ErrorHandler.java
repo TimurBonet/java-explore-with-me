@@ -14,9 +14,9 @@ import java.time.LocalDateTime;
 public class ErrorHandler {
     @ExceptionHandler
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public ErrorResponse handleRuntimeException(Exception e) {
-        log.error("500 {}", e.getMessage(), e);
-        return new ErrorResponse("RuntimeException","INTERNAL_SERVER_ERROR",
-                "Произошла непредвиденная ошибка", LocalDateTime.now());
+    public ErrorResponse handleNotValidationData(Exception e) {
+        log.error("An exception has occurred Throwable. {}", e.getMessage());
+        return new ErrorResponse("INTERNAL_SERVER_ERROR","Unexpected error",
+                "An unexpected error has occurred", LocalDateTime.now());
     }
 }

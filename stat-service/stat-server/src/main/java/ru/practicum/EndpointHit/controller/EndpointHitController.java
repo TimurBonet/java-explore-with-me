@@ -25,7 +25,7 @@ public class EndpointHitController {
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("hit")
     public void save(@Valid @RequestBody EndpointHitDto endpointHitDto) {
-        log.info("Получен POST запрос на сохранение статистики {}", endpointHitDto);
+        log.info("Received a POST request to save statistics {}", endpointHitDto);
         endpointHitService.save(endpointHitMapper.endpointHitDtoToEndpointHit(endpointHitDto));
     }
 
@@ -34,7 +34,7 @@ public class EndpointHitController {
                                            @RequestParam String end,
                                            @RequestParam(required = false) List<String> uris,
                                            @RequestParam(required = false) boolean unique) {
-        log.info("Получен запрос GET на получение статистики с параметрами start = {}, end = {}, uris = {}, " +
+        log.info("Received GET request for statistics with parameters start = {}, end = {}, uris = {}, " +
                 "unique = {}", start, end, uris, unique);
         List<ViewStats> viewStats = endpointHitService.findByParams(start, end, uris, unique);
         return viewStatsMapper.listViewStatsToListViewStatsDto(viewStats);
