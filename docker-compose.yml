@@ -28,12 +28,4 @@ services:
       interval: 5s
       retries: 10
 
-    #    ewm-service:
-    # build: main-service
-    # image: evm-service
-    #  container_name: evm-service
-        #  ports:
-  #     - "8080:8080"
 
-#  ewm-db:
-#    image: postgres:16.1

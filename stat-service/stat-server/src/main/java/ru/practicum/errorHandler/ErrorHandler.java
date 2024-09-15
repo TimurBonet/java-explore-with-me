@@ -15,8 +15,16 @@ public class ErrorHandler {
     @ExceptionHandler
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ErrorResponse handleNotValidationData(Exception e) {
-        log.error("An exception has occurred Throwable. {}", e.getMessage());
-        return new ErrorResponse("INTERNAL_SERVER_ERROR","Unexpected error",
+        log.error("An exception has occurred Throwable. {}", e.getMessage(), e);
+        return new ErrorResponse("INTERNAL_SERVER_ERROR", "Unexpected error",
                 "An unexpected error has occurred", LocalDateTime.now());
+    }
+
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorResponse handleBadRequestException(BadRequestException e) {
+        log.error("Incorrect data on request {}", e.getMessage(), e);
+        return new ErrorResponse("BAD_REQUEST", "incorrect data on request",
+                "An error has occurred", LocalDateTime.now());
     }
 }
