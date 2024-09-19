@@ -1,6 +1,7 @@
 package ru.practicum;
 
 import jakarta.servlet.http.HttpServletRequest;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
@@ -28,6 +29,7 @@ public class StatClient {
         log.info("Запущен сервер статистики, URL: {}", serverUrl);
     }
 
+    @SneakyThrows
     public void saveHit(String app, HttpServletRequest request) {
         log.info("Сохранение  {}", app);
         EndpointHitDto endpointHitDto = toDto(app, request);
@@ -42,9 +44,10 @@ public class StatClient {
         } else {
             log.error("Ошибка сохранения, код {}", response.getStatusCode());
         }
+        Thread.sleep(500);
     }
 
-    public ResponseEntity<List<ViewStatsDto>> getStats(LocalDateTime start, LocalDateTime end,
+    public List<ViewStatsDto> getStats(LocalDateTime start, LocalDateTime end,
                                                        List<String> uris, boolean unique) {
         log.info("Получение статистики для {}", uris);
         try {
@@ -64,7 +67,7 @@ public class StatClient {
                     });
         } catch (Exception e) {
             log.error("Ошибка получения статуса {} ", uris, e);
-            return new ResponseEntity<>(Collections.emptyList(), HttpStatus.SERVICE_UNAVAILABLE);
+            return Collections.emptyList();
         }
     }
 

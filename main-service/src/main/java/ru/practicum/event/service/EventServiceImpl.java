@@ -455,7 +455,7 @@ public class EventServiceImpl implements EventService {
         List<String> url = events.stream()
                 .map(event -> "/events/" + event.getId())
                 .toList();
-        Optional<List<ViewStatsDto>> viewStatsDto = Optional.ofNullable((List<ViewStatsDto>) statClient
+        Optional<List<ViewStatsDto>> viewStatsDto = Optional.ofNullable(statClient
                 .getStats(LocalDateTime.now().minusYears(20), LocalDateTime.now(), url, true)
         );
         return viewStatsDto.orElse(Collections.emptyList());
