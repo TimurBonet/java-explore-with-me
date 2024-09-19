@@ -1,10 +1,8 @@
 package ru.practicum.EndpointHit.repository;
 
-import jakarta.validation.constraints.NotNull;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import org.springframework.validation.annotation.Validated;
 import ru.practicum.EndpointHit.model.EndpointHit;
 import ru.practicum.ViewStats.model.ViewStats;
 
@@ -18,8 +16,8 @@ public interface EndpointHitRepository extends JpaRepository<EndpointHit, Long> 
             "where eh.timestamp > :start and eh.timestamp < :end and eh.uri in (:uri) " +
             "group by eh.app, eh.uri " +
             "order by count(distinct eh.ip) desc")
-    List<ViewStats> findViewStatsByStartAndEndAndUriAndUniqueIp(@Validated @NotNull @Param("start") LocalDateTime start,
-                                                                @Validated @NotNull @Param("end") LocalDateTime end,
+    List<ViewStats> findViewStatsByStartAndEndAndUriAndUniqueIp(@Param("start") LocalDateTime start,
+                                                                @Param("end") LocalDateTime end,
                                                                 @Param("uri") List<String> uri);
 
     @Query("select new ru.practicum.ViewStats.model.ViewStats(eh.app, eh.uri, count(eh.ip)) " +
@@ -27,8 +25,8 @@ public interface EndpointHitRepository extends JpaRepository<EndpointHit, Long> 
             "where eh.timestamp > :start and eh.timestamp < :end and eh.uri in (:uri) " +
             "group by eh.app, eh.uri " +
             "order by count(eh.ip) desc")
-    List<ViewStats> findViewStatsByStartAndEndAndUri(@Validated @NotNull @Param("start") LocalDateTime start,
-                                                     @Validated @NotNull @Param("end") LocalDateTime end,
+    List<ViewStats> findViewStatsByStartAndEndAndUri(@Param("start") LocalDateTime start,
+                                                     @Param("end") LocalDateTime end,
                                                      @Param("uri") List<String> uri);
 
     @Query("select distinct eh.uri " +
