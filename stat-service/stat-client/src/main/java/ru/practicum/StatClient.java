@@ -47,7 +47,7 @@ public class StatClient {
     }
 
     public List<ViewStatsDto> getStats(LocalDateTime start, LocalDateTime end,
-                                                       List<String> uris, boolean unique) {
+                                       List<String> uris, boolean unique) {
         log.info("Получение статистики для {}", uris);
         try {
             return restClient.get()

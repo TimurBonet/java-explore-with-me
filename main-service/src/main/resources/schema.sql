@@ -23,10 +23,10 @@ create table if not exists location
 create table if not exists events
 (
     id                 bigint generated always as identity primary key,
-    annotation         varchar,
+    annotation         varchar(255),
     category_id        bigint REFERENCES categories (id) ON DELETE CASCADE ON UPDATE CASCADE,
     created_on         TIMESTAMP NOT NULL,
-    description        varchar   NOT NULL,
+    description        varchar(255)   NOT NULL,
     event_date         TIMESTAMP NOT NULL,
     initiator_id       bigint REFERENCES users (id) ON DELETE CASCADE ON UPDATE CASCADE,
     location_id        bigint REFERENCES location (id) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -34,8 +34,8 @@ create table if not exists events
     participant_limit  INTEGER   NOT NULL,
     published_on       TIMESTAMP,
     request_moderation BOOLEAN   NOT NULL,
-    state              varchar   NOT NULL,
-    title              varchar   NOT NULL,
+    state              varchar(255)  NOT NULL,
+    title              varchar(255)   NOT NULL,
     confirmed_requests INTEGER
 );
 
