@@ -17,6 +17,7 @@ import ru.practicum.exception.NotFoundException;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -54,9 +55,11 @@ public class CompilationServiceImpl implements CompilationService {
             compilation.setEvents(eventRepository.findAllByIdIn(request.getEvents()));
         }
 
-        if (request.getPinned() != null) compilation.setPinned(request.getPinned());
+        /*if (request.getPinned() != null) compilation.setPinned(request.getPinned());
 
-        if (request.getTitle() != null) compilation.setTitle(request.getTitle());
+        if (request.getTitle() != null) compilation.setTitle(request.getTitle());*/
+        compilation.setPinned(Optional.ofNullable(request.getPinned()).orElse(compilation.getPinned()));
+        compilation.setTitle(Optional.ofNullable(request.getTitle()).orElse(compilation.getTitle()));
 
         log.info("The compilation has been updated");
         return compilationMapper.compilationToCompilationDto(compilation);

@@ -1,7 +1,9 @@
 package ru.practicum.user.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -19,7 +21,9 @@ public class User {
     Long id;
     @NotBlank
     @Column(unique = true)
+    @Email
     String email;
     @NotBlank
+    @Size(max = 250)
     String name;
 }

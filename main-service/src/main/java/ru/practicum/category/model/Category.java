@@ -2,6 +2,7 @@ package ru.practicum.category.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -18,5 +19,6 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     @NotBlank
+    @Size(max = 100)
     String name;
 }
