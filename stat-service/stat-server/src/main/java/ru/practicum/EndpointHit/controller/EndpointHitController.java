@@ -1,9 +1,11 @@
 package ru.practicum.EndpointHit.controller;
 
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.EndpointHit.mapper.EndpointHitMapper;
 import ru.practicum.EndpointHit.service.EndpointHitService;
@@ -22,7 +24,7 @@ public class EndpointHitController {
     private final EndpointHitMapper endpointHitMapper;
     private final ViewStatsMapper viewStatsMapper;
 
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("hit")
     public void save(@Valid @RequestBody EndpointHitDto endpointHitDto) {
         log.info("Received a POST request to save statistics {}", endpointHitDto);
@@ -30,8 +32,8 @@ public class EndpointHitController {
     }
 
     @GetMapping("stats")
-    public List<ViewStatsDto> findByParams(@RequestParam String start,
-                                           @RequestParam String end,
+    public List<ViewStatsDto> findByParams(@Validated @NotNull @RequestParam String start,
+                                           @Validated @NotNull @RequestParam String end,
                                            @RequestParam(required = false) List<String> uris,
                                            @RequestParam(required = false) boolean unique) {
         log.info("Received GET request for statistics with parameters start = {}, end = {}, uris = {}, " +
