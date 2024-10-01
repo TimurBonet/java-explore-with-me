@@ -2,10 +2,10 @@ drop table if exists users, categories, location, events, requests, compilations
 
 create table if not exists users
 (
-    id    bigint generated always as identity primary key,
-    email varchar(255) not null unique,
-    name  varchar(255) not null,
-    rating  INTEGER not null
+    id     bigint generated always as identity primary key,
+    email  varchar(255) not null unique,
+    name   varchar(255) not null,
+    rating INTEGER      not null
 );
 
 create table if not exists categories
@@ -24,21 +24,21 @@ create table if not exists location
 create table if not exists events
 (
     id                 bigint generated always as identity primary key,
-    annotation         varchar,
+    annotation         varchar(255),
     category_id        bigint REFERENCES categories (id) ON DELETE CASCADE ON UPDATE CASCADE,
-    created_on         TIMESTAMP NOT NULL,
-    description        varchar   NOT NULL,
-    event_date         TIMESTAMP NOT NULL,
+    created_on         TIMESTAMP    NOT NULL,
+    description        varchar(255) NOT NULL,
+    event_date         TIMESTAMP    NOT NULL,
     initiator_id       bigint REFERENCES users (id) ON DELETE CASCADE ON UPDATE CASCADE,
     location_id        bigint REFERENCES location (id) ON DELETE CASCADE ON UPDATE CASCADE,
-    paid               BOOLEAN   NOT NULL,
-    participant_limit  INTEGER   NOT NULL,
+    paid               BOOLEAN      NOT NULL,
+    participant_limit  INTEGER      NOT NULL,
     published_on       TIMESTAMP,
-    request_moderation BOOLEAN   NOT NULL,
-    state              varchar   NOT NULL,
-    title              varchar   NOT NULL,
+    request_moderation BOOLEAN      NOT NULL,
+    state              varchar(30)  NOT NULL,
+    title              varchar(255) NOT NULL,
     confirmed_requests INTEGER,
-    rating             INTEGER   NOT NULL
+    rating             INTEGER      NOT NULL
 );
 
 create table if not exists requests
@@ -65,10 +65,10 @@ create table if not exists compilations_events
 
 create table if not exists likes
 (
-    id         bigint generated always as identity primary key,
-    event_id   bigint REFERENCES events (id) ON DELETE CASCADE ON UPDATE CASCADE,
-    user_id    bigint REFERENCES users (id) ON DELETE CASCADE ON UPDATE CASCADE,
-    status     varchar(10) NOT NULL,
-    created    TIMESTAMP
+    id       bigint generated always as identity primary key,
+    event_id bigint REFERENCES events (id) ON DELETE CASCADE ON UPDATE CASCADE,
+    user_id  bigint REFERENCES users (id) ON DELETE CASCADE ON UPDATE CASCADE,
+    status   varchar(10) NOT NULL,
+    created  TIMESTAMP
 );
 
