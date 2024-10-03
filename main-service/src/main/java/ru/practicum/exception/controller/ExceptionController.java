@@ -25,7 +25,7 @@ public class ExceptionController {
     @ExceptionHandler
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ApiError handleCommonException(Exception e) {
-        log.error("500 {} ", e.getMessage());
+        log.error("500 {} ", e.getMessage(), e);
         return ApiError.builder()
                 .status(HttpStatus.INTERNAL_SERVER_ERROR.name())
                 .reason("Internal Server Error")
@@ -38,7 +38,7 @@ public class ExceptionController {
     @ExceptionHandler
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ApiError handleMissingServletRequestParameterException(MissingServletRequestParameterException e) {
-        log.error("409 {} ", e.getMessage());
+        log.error("409 {} ", e.getMessage(), e);
         return ApiError.builder()
                 .status(HttpStatus.BAD_REQUEST.name())
                 .reason("Incorrectly made request")
@@ -51,7 +51,7 @@ public class ExceptionController {
     @ExceptionHandler
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ApiError handleDataTimeException(DataTimeException e) {
-        log.error("409 {} ", e.getMessage());
+        log.error("409 {} ", e.getMessage(), e);
         return ApiError.builder()
                 .status(HttpStatus.BAD_REQUEST.name())
                 .reason("Incorrectly made request with date and time")
@@ -64,7 +64,7 @@ public class ExceptionController {
     @ExceptionHandler
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ApiError handleNotFoundException(NotFoundException e) {
-        log.error("404 {} ", e.getMessage());
+        log.error("404 {} ", e.getMessage(), e);
         return ApiError.builder()
                 .status(HttpStatus.NOT_FOUND.name())
                 .reason("The required object was not found")
@@ -77,7 +77,7 @@ public class ExceptionController {
     @ExceptionHandler
     @ResponseStatus(HttpStatus.CONFLICT)
     public ApiError handleIntegrityViolationException(IntegrityViolationException e) {
-        log.error("409 {} ", e.getMessage());
+        log.error("409 {} ", e.getMessage(), e);
         return ApiError.builder()
                 .status(HttpStatus.CONFLICT.name())
                 .reason("Integrity constraint has been violated")
@@ -90,7 +90,7 @@ public class ExceptionController {
     @ExceptionHandler
     @ResponseStatus(HttpStatus.CONFLICT)
     public ApiError handleRestrictionsViolationException(RestrictionsViolationException e) {
-        log.error("409 {} ", e.getMessage());
+        log.error("409 {} ", e.getMessage(), e);
         return ApiError.builder()
                 .status(HttpStatus.CONFLICT.name())
                 .reason("For the requested operation the conditions are not met.")
@@ -103,7 +103,7 @@ public class ExceptionController {
     @ExceptionHandler
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ApiError handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
-        log.error("400 {} ", e.getMessage());
+        log.error("400 {} ", e.getMessage(), e);
         String violations = e.getBindingResult().getAllErrors()
                 .stream()
                 .map(DefaultMessageSourceResolvable::getDefaultMessage)
@@ -120,7 +120,7 @@ public class ExceptionController {
     @ExceptionHandler
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ApiError handleMethodArgumentTypeMismatchException(MethodArgumentTypeMismatchException e) {
-        log.error("400 {} ", e.getMessage());
+        log.error("400 {} ", e.getMessage(), e);
         return ApiError.builder()
                 .status(HttpStatus.BAD_REQUEST.name())
                 .reason("Incorrectly made request")
