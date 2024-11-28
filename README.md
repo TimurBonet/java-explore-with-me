@@ -1,3 +1,6 @@
+
+![59a32d7c-ede0-58fb-8839-ff2798e5a57a](https://github.com/user-attachments/assets/4de08bb8-7979-4ea4-9dd7-fd74ab0e07ba)
+
 # java-explore-with-me
 Сервис-афиша, где можно предложить какое-либо событие и собрать компанию для участия в нём
 
